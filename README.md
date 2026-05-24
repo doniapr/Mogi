@@ -1,6 +1,6 @@
 # Mogi API
 
-Mogi API adalah aplikasi Go yang mengikuti pola Clean Architecture, terinspirasi dari project Borobudur.
+Mogi adalah aplikasi untuk mock response API yang dibangun dengan Go mengikuti pola Clean Architecture. Aplikasi ini memudahkan developer untuk membuat mock endpoint dengan response yang dapat dikustomisasi.
 
 ## Struktur Project
 
@@ -9,15 +9,15 @@ Mogi/
 ├── main.go                                   # Application entry point
 ├── internal/
 │   ├── domain/
-│   │   └── mocker.go                       # Mocker domain model
+│   │   └── user.go                         # User domain model
 │   ├── dto/
-│   │   └── mocker.go                       # Mocker DTOs
+│   │   └── mocker.go                       # User DTOs
 │   ├── infrastructure/
 │   │   └── postgres/
 │   │       └── postgres.go                 # Database connection & repository
 │   ├── interfaces/
 │   │   ├── handler/
-│   │   │   └── mocker.go                  # Mocker HTTP handlers
+│   │   │   └── mocker.go                  # User HTTP handlers
 │   │   └── server/
 │   │       └── server.go                  # Echo server configuration
 │   ├── shared/
@@ -30,7 +30,9 @@ Mogi/
 │   │   └── validator/                     # Validation
 │   └── usecase/
 │       └── mocker/
-│           └── usecase.go                 # Mocker business logic
+│           └── usecase.go                 # User business logic
+├── migrations/                              # Database migrations
+│   └── 001_create_users_table.sql          # Users table migration
 ├── resources/                              # Configuration & resource files
 │   ├── config.json                        # Configuration file
 │   └── config.json.example                # Example configuration
@@ -75,11 +77,11 @@ Project ini mengikuti **Clean Architecture** dengan separation of concerns:
 
 ```
 GET    /                  # Welcome message
-GET    /mockers           # Get all mockers
-GET    /mockers/:id      # Get mocker by ID
-POST   /mockers          # Create new mocker
-PUT    /mockers/:id      # Update mocker
-DELETE /mockers/:id      # Delete mocker
+GET    /users             # Get all users
+GET    /users/:id         # Get user by ID
+POST   /users             # Create new user
+PUT    /users/:id         # Update user
+DELETE /users/:id         # Delete user
 ```
 
 ## Setup & Running
@@ -137,39 +139,39 @@ Server akan berjalan di `localhost:8000`
 
 ## Request Examples
 
-### Get All Mockers
+### Get All Users
 ```bash
-curl http://localhost:8000/mockers
+curl http://localhost:8000/users
 ```
 
-### Create Mocker
+### Create User
 ```bash
-curl -X POST http://localhost:8000/mockers \
+curl -X POST http://localhost:8000/users \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "age": 30
+    "email": "user@example.com",
+    "password": "securepassword"
   }'
 ```
 
-### Get Mocker by ID
+### Get User by ID
 ```bash
-curl http://localhost:8000/mockers/1
+curl http://localhost:8000/users/1
 ```
 
-### Update Mocker
+### Update User
 ```bash
-curl -X PUT http://localhost:8000/mockers/1 \
+curl -X PUT http://localhost:8000/users/1 \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Jane Doe",
-    "age": 28
+    "email": "newemail@example.com",
+    "password": "newsecurepassword"
   }'
 ```
 
-### Delete Mocker
+### Delete User
 ```bash
-curl -X DELETE http://localhost:8000/mockers/1
+curl -X DELETE http://localhost:8000/users/1
 ```
 
 ## Best Practices
