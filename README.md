@@ -11,13 +11,13 @@ Mogi/
 │   ├── domain/
 │   │   └── user.go                         # User domain model
 │   ├── dto/
-│   │   └── mocker.go                       # User DTOs
+│   │   └── users.go                       # User DTOs
 │   ├── infrastructure/
 │   │   └── postgres/
 │   │       └── postgres.go                 # Database connection & repository
 │   ├── interfaces/
 │   │   ├── handler/
-│   │   │   └── mocker.go                  # User HTTP handlers
+│   │   │   └── users.go                  # User HTTP handlers
 │   │   └── server/
 │   │       └── server.go                  # Echo server configuration
 │   ├── shared/
@@ -29,7 +29,7 @@ Mogi/
 │   │   ├── utils/                         # Utility functions
 │   │   └── validator/                     # Validation
 │   └── usecase/
-│       └── mocker/
+│       └── users/
 │           └── usecase.go                 # User business logic
 ├── migrations/                              # Database migrations
 │   └── 001_create_users_table.sql          # Users table migration

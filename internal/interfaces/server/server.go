@@ -24,19 +24,8 @@ func NewServer(db *postgres.Database) *echo.Echo {
 	// Initialize handlers
 	usersHandler := handler.NewUserHandler(usersUC)
 
-	// Routes
-	server.GET("/", func(c echo.Context) error {
-		return c.JSON(200, map[string]string{
-			"message": "Welcome to Users API",
-		})
-	})
-
-	// User routes
-	server.GET("/users", usersHandler.GetAll)
-	server.GET("/users/:id", usersHandler.GetByID)
-	server.POST("/users", usersHandler.Create)
-	server.PUT("/users/:id", usersHandler.Update)
-	server.DELETE("/users/:id", usersHandler.Delete)
+	// Setup routes
+	setupRoutes(server, usersHandler)
 
 	return server
 }
